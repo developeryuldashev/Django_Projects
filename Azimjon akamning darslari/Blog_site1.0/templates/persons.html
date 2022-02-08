@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons</title>
+</head>
+<body>
+<h1>Persons List</h1>
+<ul>
+    {% for person in persons %}
+    <li>
+        <h4>{{ person.user.username }}</h4>
+        <p>
+            {{ person.comments}}
+        </p>
+    </li>
+    {% endfor %}
+
+</ul>
+
+
+
+</body>
+</html>

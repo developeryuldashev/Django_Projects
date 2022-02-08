@@ -1,0 +1,44 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>{{ article.name }}</title>
+   <script>
+    function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+       </script>
+</head>
+<body>
+<h2>{{  article.name }}</h2>
+<p>{{ article.content }}</p>
+ <small> Author:{{ article.author }}    </small>
+<b style="margin-left: 30px"><i onclick="setreaction({{article.id}},'like')"><img src="{% static 'images/like.png' %}" width="15px" > </i> <i id="like">{{ article.like }}</i>
+    <i onclick="setreaction({{article.id}},'dislike')"><img style="margin-left: 30px" src="{% static 'images/dislike.png' %}" width="15px" > </i><i id="dislike"> {{ article.dislike }}</i></b>
+<h3>Write comments...</h3>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="comment"><button type="submit">Send</button>
+</form>
+<h3>Comments</h3>
+    <ul>
+        {% for commit in  article.comments.all %}
+        <li><p>{{ commit.commit }}</p>
+        <small>{{ commit.person }}</small></li>
+        {% endfor %}
+    </ul>
+<script src="{% static 'js/action.js'  %}"></script>
+</body>
+</html>

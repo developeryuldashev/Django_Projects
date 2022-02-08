@@ -1,0 +1,14 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<h2>{{  article.name }}</h2>
+<p>{{ article.content }}</p>
+ <small> Author:{{ article.author }}    </small><b style="margin-left: 30px"><a href="{% url 'reaction' article.id 'like' %}"><img src="{% static 'images/like.png' %}" width="15px" > </a> {{ article.like }} <a href="{% url 'reaction' article.id 'dislike' %}" ><img style="margin-left: 30px" src="{% static 'images/dislike.png' %}" width="15px" > </a> {{ article.dislike }}</b>
+
+</body>
+</html>
